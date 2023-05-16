@@ -5,12 +5,21 @@ from scipy.stats import pearsonr, spearmanr
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+import os
 
 ######################################################################################################################
 # PRICES
 ######################################################################################################################
 # Load data
-df1 = pd.read_csv('2021prices.csv')
+
+# Get the directory path of the script
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the file path relative to the script directory
+file_path = os.path.join(script_directory, '2021prices.csv')
+
+# Read the CSV file
+df1 = pd.read_csv(file_path)
 df2 = pd.read_csv('prices.csv')
 dfload = pd.read_csv('Load_data.csv')
 

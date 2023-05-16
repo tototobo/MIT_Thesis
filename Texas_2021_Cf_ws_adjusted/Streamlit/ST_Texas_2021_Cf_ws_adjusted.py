@@ -14,14 +14,15 @@ import os
 
 # Get the directory path of the script
 script_directory = os.path.dirname(os.path.abspath(__file__))
-
 # Construct the file path relative to the script directory
-file_path = os.path.join(script_directory, '2021prices.csv')
+file_path_2021prices = os.path.join(script_directory, '2021prices.csv')
+file_path_prices = os.path.join(script_directory, 'prices.csv')
+file_path_Load_data = os.path.join(script_directory, 'Load_data.csv')
 
 # Read the CSV file
-df1 = pd.read_csv(file_path)
-df2 = pd.read_csv('prices.csv')
-dfload = pd.read_csv('Load_data.csv')
+df1 = pd.read_csv(file_path_2021prices)
+df2 = pd.read_csv(file_path_prices)
+dfload = pd.read_csv(file_path_Load_data)
 
 # Create a new column with the time index for the prices
 df2['Time_Index'] = range(min(df1['Time_Index']), max(df1['Time_Index'])+1)
@@ -154,8 +155,11 @@ st.plotly_chart(fig3, use_container_width=True)
 ######################################################################################################################
 
 # read csv
-dfgenX = pd.read_csv("power.csv")
-dfgenE = pd.read_csv("IntGenbyFuel2021_hourly.csv")
+file_path_power = os.path.join(script_directory, 'power.csv')
+file_path_IntGenbyFuel2021_hourly = os.path.join(script_directory, 'IntGenbyFuel2021_hourly.csv')
+
+dfgenX = pd.read_csv(file_path_power)
+dfgenE = pd.read_csv(file_path_IntGenbyFuel2021_hourly)
 dfgenX = dfgenX.iloc[2:] # remove first two rows, as first row is zone and second is annual sum
 dfgenX['Time_Index'] = range(1, len(dfgenX) + 1)
 dfgenE['Time_Index'] = range(1, len(dfgenE) + 1)

@@ -169,6 +169,7 @@ dfgenX.set_index("Date", inplace=True)
 dfgenE.set_index("Date", inplace=True)
 
 
+# Create plotgenX, create total column
 natural_gasX_cols = [col for col in dfgenX.columns if "natural_gas" in col]
 coalX_cols = [col for col in dfgenX.columns if "coal" in col]
 nuclearX_cols = [col for col in dfgenX.columns if "nuclear" in col]
@@ -185,6 +186,8 @@ biomassE_cols = [col for col in dfgenE.columns if "Biomass" in col]
 solarE_cols = [col for col in dfgenE.columns if "Solar" in col]
 hydroE_cols = [col for col in dfgenE.columns if "Hydro" in col]
 otherE_cols = [col for col in dfgenE.columns if "Other" in col]
+totalX_cols = natural_gasX_cols + coalX_cols + nuclearX_cols + windX_cols + biomassX_cols + solarX_cols + hydroX_cols + otherX_cols
+totalE_cols = natural_gasE_cols + coalE_cols + nuclearE_cols + windE_cols + biomassE_cols + solarE_cols + hydroE_cols + otherE_cols
 
 dfgen_summed = pd.DataFrame({
     "nuclearX": dfgenX[nuclearX_cols].sum(axis=1),
@@ -203,8 +206,8 @@ dfgen_summed = pd.DataFrame({
     "hydroE": dfgenE[hydroE_cols].sum(axis=1),
     "otherX": dfgenX[otherX_cols].sum(axis=1),
     "otherE": dfgenE[otherE_cols].sum(axis=1),
-    "totalX": dfgenX.sum(axis=1),
-    "totalE": dfgenE.sum(axis=1)
+    "totalX": dfgenX[totalX_cols].sum(axis=1),
+    "totalE": dfgenE[totalE_cols].sum(axis=1)
 })
 
 fig4 = go.Figure()

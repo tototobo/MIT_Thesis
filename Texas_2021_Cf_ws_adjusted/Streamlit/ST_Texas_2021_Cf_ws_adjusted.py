@@ -266,6 +266,16 @@ dfgen_diff_avg_std['total_diff'] = dfgen_summed['totalE'] - dfgen_summed['totalX
 dfgen_diff_avg_std['total_avg'] = dfgen_diff_avg_std['total_diff'].mean()
 dfgen_diff_avg_std['total_std'] = dfgen_diff_avg_std['total_diff'].std()
 
+# add the cumulative sum of the difference
+dfgen_diff_avg_std['nuclear_cumsum'] = dfgen_diff_avg_std['nuclear_diff'].cumsum()
+dfgen_diff_avg_std['natural_gas_cumsum'] = dfgen_diff_avg_std['natural_gas_diff'].cumsum()
+dfgen_diff_avg_std['coal_cumsum'] = dfgen_diff_avg_std['coal_diff'].cumsum()
+dfgen_diff_avg_std['solar_cumsum'] = dfgen_diff_avg_std['solar_diff'].cumsum()
+dfgen_diff_avg_std['wind_cumsum'] = dfgen_diff_avg_std['wind_diff'].cumsum()
+dfgen_diff_avg_std['biomass_cumsum'] = dfgen_diff_avg_std['biomass_diff'].cumsum()
+dfgen_diff_avg_std['hydro_cumsum'] = dfgen_diff_avg_std['hydro_diff'].cumsum()
+dfgen_diff_avg_std['other_cumsum'] = dfgen_diff_avg_std['other_diff'].cumsum()
+dfgen_diff_avg_std['total_cumsum'] = dfgen_diff_avg_std['total_diff'].cumsum()
 
 fig5 = go.Figure()
 

@@ -59,7 +59,7 @@ with col2:
 
 # Create plot1
 fig1, ax1 = plt.subplots()
-ax1.plot(filtered_df1_1['Date'], filtered_df1_1['Prices'])
+ax1.plot(filtered_df1_1['Date'], filtered_df1_1['Price'])
 ax1.plot(filtered_df2_1['Date'], filtered_df2_1['1'])
 ax1.legend(['Empirical Prices', 'GenX'])
 ax1.set_xlabel('Date')
@@ -78,7 +78,7 @@ plt.xticks(rotation=45, ha='right')
 
 # Create plot2
 fig2, ax2 = plt.subplots()
-ax2.plot(filtered_df1_2['Date'], filtered_df1_2['Prices'])
+ax2.plot(filtered_df1_2['Date'], filtered_df1_2['Price'])
 ax2.plot(filtered_df2_2['Date'], filtered_df2_2['1'])
 ax2.legend(['Empirical Prices', 'GenX'])
 ax2.set_xlabel('Date')
@@ -110,7 +110,7 @@ step_size = 24
 corr_pearson = []
 corr_spearman = []
 for i in range(0, len(df1), step_size):
-    y1 = df1.iloc[i:i+step_size]['Prices']
+    y1 = df1.iloc[i:i+step_size]['Price']
     y2 = df2.iloc[i:i+step_size]['1']
     p_corr, _ = pearsonr(y1, y2)
     s_corr, _ = spearmanr(y1, y2)
@@ -202,7 +202,9 @@ dfgen_summed = pd.DataFrame({
     "hydroX": dfgenX[hydroX_cols].sum(axis=1),
     "hydroE": dfgenE[hydroE_cols].sum(axis=1),
     "otherX": dfgenX[otherX_cols].sum(axis=1),
-    "otherE": dfgenE[otherE_cols].sum(axis=1)
+    "otherE": dfgenE[otherE_cols].sum(axis=1),
+    "totalX": dfgenX.sum(axis=1),
+    "totalE": dfgenE.sum(axis=1)
 })
 
 fig4 = go.Figure()
@@ -257,6 +259,10 @@ dfgen_diff_avg_std['hydro_std'] = dfgen_diff_avg_std['hydro_diff'].std()
 dfgen_diff_avg_std['other_diff'] = dfgen_summed['otherE'] - dfgen_summed['otherX']
 dfgen_diff_avg_std['other_avg'] = dfgen_diff_avg_std['other_diff'].mean()
 dfgen_diff_avg_std['other_std'] = dfgen_diff_avg_std['other_diff'].std()
+dfgen_diff_avg_std['total_diff'] = dfgen_summed['totalE'] - dfgen_summed['totalX']
+dfgen_diff_avg_std['total_avg'] = dfgen_diff_avg_std['total_diff'].mean()
+dfgen_diff_avg_std['total_std'] = dfgen_diff_avg_std['total_diff'].std()
+
 
 fig5 = go.Figure()
 
@@ -298,8 +304,8 @@ for column in dfgen_summed.columns:
     elif generation_type == 'X':
         avg_generation_table.loc['X', fuel_type] = dfgen_summed[column].mean()
 
-# Add a column for the total generation
-avg_generation_table['Total'] = avg_generation_table.sum(axis=1)
+# # Add a column for the total generation
+# avg_generation_table['Total'] = avg_generation_table.sum(axis=1)
 
 # Calculate the delta in percentage between 'X' and 'E' generations
 x_generation = avg_generation_table.loc['X']

@@ -138,13 +138,12 @@ corr.index = pd.to_datetime(corr.index)
 corr.drop('Time_Index', axis=1, inplace=True)
 corr.dropna(inplace=True)
 
-# Create a table with the average prices, the average variance of the prices, the median prices, and the median variance
+# Create a table with the average prices, the average variance of the prices, the median prices
 data_table = pd.DataFrame()
 data_table['Data'] = ['Empirical', 'GenX']
 data_table['Average Price'] = [np.mean(y1), np.mean(y2)]
 data_table['Average Variance'] = [np.var(y1), np.var(y2)]
 data_table['Median Price'] = [np.median(y1), np.median(y2)]
-data_table['Median Variance'] = [np.median(np.var(y1)), np.median(np.var(y2))]
 data_table.set_index('Data', inplace=True)
 
 # Calculate the mean absolute error between y1 and y2

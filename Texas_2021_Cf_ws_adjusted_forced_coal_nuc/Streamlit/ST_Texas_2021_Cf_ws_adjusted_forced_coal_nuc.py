@@ -167,6 +167,7 @@ figfreqdis.update_layout(
     xaxis=dict(title="Price"),
     yaxis=dict(title="Count"),
     dragmode="pan",
+    barmode='overlay',
     margin=dict(l=20, r=20, t=30, b=20), height=500, width=800,
     font=dict(color='black'),
 )

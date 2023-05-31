@@ -10,8 +10,15 @@ import os
 def mean_absolute_error(y_true, y_pred):
     return np.mean(np.abs(y_true - y_pred))
 
-# Set page title
-st.title('Texas 2021 Cf ws adjusted forced coal nuc unit commitment')
+# set page title
+st.title('Texas 2021 Forced Coal and Nuclear, Unit commitment')
+
+# add table with text
+st.write('### Parameters')
+param_table = pd.DataFrame()
+param_table['Parameter'] = ['Year', 'Forced coal generation', 'Forced nuclear generation', 'Unit commitment', 'Energy share requirement']
+param_table['Value'] = ['2021', '3000 MW', 'Yes - MUST_RUN', 'Yes', 'No']
+st.table(param_table)
 
 ######################################################################################################################
 # PRICES

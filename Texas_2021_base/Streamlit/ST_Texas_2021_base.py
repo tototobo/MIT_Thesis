@@ -11,7 +11,14 @@ def mean_absolute_error(y_true, y_pred):
     return np.mean(np.abs(y_true - y_pred))
 
 # set page title
-st.title('Texas 2021 Cf ws adjusted')
+st.title('Texas 2021 Base')
+
+# add table with text
+st.write('### Parameters')
+param_table = pd.DataFrame()
+param_table['Parameter'] = ['Year', 'Forced coal generation', 'Forced nuclear generation', 'Unit commitment', 'Energy share requirement']
+param_table['Value'] = ['2021', 'No', 'No', 'No', 'No']
+st.table(param_table)
 
 ######################################################################################################################
 # PRICES

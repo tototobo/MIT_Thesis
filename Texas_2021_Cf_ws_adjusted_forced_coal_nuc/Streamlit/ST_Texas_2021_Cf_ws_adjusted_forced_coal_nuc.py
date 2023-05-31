@@ -16,11 +16,11 @@ def mean_absolute_error(y_true, y_pred):
 # Load data
 
 # Get the directory path of the script
-# script_directory = os.path.dirname(os.path.abspath(__file__))
+script_directory = os.path.dirname(os.path.abspath(__file__))
 # Construct the file path relative to the script directory
-file_path_2021prices = "C:/Users/tsbon/GenX-main/Thomas_Systems/MIT_Thesis/Texas_2021_Cf_ws_adjusted_forced_coal_nuc/Streamlit/2021prices.csv"
-file_path_prices = "C:/Users/tsbon/GenX-main/Thomas_Systems/MIT_Thesis/Texas_2021_Cf_ws_adjusted_forced_coal_nuc/Streamlit/prices.csv"
-file_path_Load_data = "C:/Users/tsbon/GenX-main/Thomas_Systems/MIT_Thesis/Texas_2021_Cf_ws_adjusted_forced_coal_nuc/Streamlit/Load_data.csv"
+file_path_2021prices = os.path.join(script_directory, '2021prices.csv')
+file_path_prices = os.path.join(script_directory, 'prices.csv')
+file_path_Load_data = os.path.join(script_directory, 'Load_data.csv')
 
 # Read the CSV file
 df1 = pd.read_csv(file_path_2021prices)

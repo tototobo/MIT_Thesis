@@ -191,8 +191,8 @@ st.plotly_chart(fig3, use_container_width=True)
 ######################################################################################################################
 
 # read csv
-file_path_power = "C:/Users/tsbon/GenX-main/Thomas_Systems/MIT_Thesis/Texas_2021_Cf_ws_adjusted_forced_coal_nuc/Streamlit/power.csv"
-file_path_IntGenbyFuel2021_hourly = "C:/Users/tsbon/GenX-main/Thomas_Systems/MIT_Thesis/Texas_2021_Cf_ws_adjusted_forced_coal_nuc/Streamlit/IntGenbyFuel2021_hourly.csv"
+file_path_power = os.path.join(script_directory, 'power.csv')
+file_path_IntGenbyFuel2021_hourly = os.path.join(script_directory, 'IntGenbyFuel2021_hourly.csv')
 
 dfgenX = pd.read_csv(file_path_power)
 dfgenE = pd.read_csv(file_path_IntGenbyFuel2021_hourly)

@@ -161,11 +161,13 @@ df['GenX'] = df2['1']
 max_price = 200
 df['Empirical'] = df['Empirical'].apply(lambda x: max_price if x > max_price else x)
 df['GenX'] = df['GenX'].apply(lambda x: max_price if x > max_price else x)
+
 figfreqdis = px.histogram(df, x=df.columns, marginal="rug", title="Frequency Distribution of Prices")
 figfreqdis.update_layout(
     xaxis=dict(title="Price"),
     yaxis=dict(title="Count"),
     dragmode="pan",
+    barmode='overlay',
     margin=dict(l=20, r=20, t=30, b=20), height=500, width=800,
     font=dict(color='black'),
 )

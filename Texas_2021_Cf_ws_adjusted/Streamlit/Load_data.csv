@@ -1,5 +1,5 @@
 Unnamed: 0.1.1.1.1.1,Voll,Demand_Segment,Cost_of_Demand_Curtailment_per_MW,Max_Demand_Curtailment,Rep_Periods,Timesteps_per_Rep_Period,Sub_Weights,Time_Index,Load_MW_z1,Year
-0,9000.0,1.0,1.0,1.0,1.0,8759.0,1.0,1,43719.84962,1970
+0,9000000.0,1.0,1.0,1.0,1.0,8759.0,1.0,1,43719.84962,1970
 1,,,,,,,,2,43321.05035,1970
 2,,,,,,,,3,43063.06706,1970
 3,,,,,,,,4,43090.0592,1970

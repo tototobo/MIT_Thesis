@@ -7,6 +7,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import os
 
+def mean_absolute_error(y_true, y_pred):
+    return np.mean(np.abs(y_true - y_pred))
+
 ######################################################################################################################
 # PRICES
 ######################################################################################################################
@@ -117,6 +120,9 @@ for i in range(0, len(df1), step_size):
     corr_pearson.append(p_corr)
     corr_spearman.append(s_corr)
 
+# Calculate the mean absolute error between y1 and y2
+mae = mean_absolute_error(y1, y2)
+
 # Create a dataframe with the correlation coefficients
 corr = pd.DataFrame()
 corr['Time_Index'] = range(1, len(corr_pearson) + 1)
@@ -131,10 +137,38 @@ corr.index = pd.to_datetime(corr.index)
 corr.drop('Time_Index', axis=1, inplace=True)
 corr.dropna(inplace=True)
 
-# Calculate the average correlation for each method
-avg_pearson = np.mean(corr_pearson)
-avg_spearman = np.mean(corr_spearman)
+# Create a table with the average prices, the average variance of the prices
+data_table = pd.DataFrame()
+data_table['Data'] = ['Empirical', 'GenX']
+data_table['Average Price'] = [np.mean(y1), np.mean(y2)]
+data_table['Average Variance'] = [np.var(y1), np.var(y2)]
+data_table.set_index('Data', inplace=True)
 
+# Create a table with the average correlation coefficients, the mean absolute error
+metrics_table = pd.DataFrame()
+metrics_table['Metrics'] = ['Pearson', 'Spearman', 'Mean Absolute Error']
+metrics_table['Average'] = [np.mean(corr_pearson), np.mean(corr_spearman), mae]
+metrics_table.set_index('Metrics', inplace=True)
+
+# Create and display a frequency distribution of df1['Price'] and df2['1'] on the same plot. Do so by puting the two in a new dataframe and using the plotly express histogram function
+df = pd.DataFrame()
+df['Empirical'] = df1['Price']
+df['GenX'] = df2['1']
+# If df['Empirical'] and df['Genx'] values are above max_price, set them to max_price
+max_price = 200
+df['Empirical'] = df['Empirical'].apply(lambda x: max_price if x > max_price else x)
+df['GenX'] = df['GenX'].apply(lambda x: max_price if x > max_price else x)
+figfreqdis = px.histogram(df, x=df.columns, marginal="rug", title="Frequency Distribution of Prices")
+figfreqdis.update_layout(
+    xaxis=dict(title="Price"),
+    yaxis=dict(title="Count"),
+    dragmode="pan",
+    margin=dict(l=20, r=20, t=30, b=20), height=500, width=800,
+    font=dict(color='black'),
+)
+figfreqdis.update_layout(legend=dict(title='Method', orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1))
+
+# Create plot3
 fig3 = px.line(corr, x=corr.index, y=corr.columns, title="Daily Correlation Curves")
 fig3.update_layout(
     xaxis=dict(title="Date", range=[start_date, corr.index[-1]], rangemode='tozero'),
@@ -145,8 +179,9 @@ fig3.update_layout(
 )
 fig3.update_layout(legend=dict(title='Method', orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1))
 
-st.write("Average Pearson Correlation: ", avg_pearson)
-st.write("Average Spearman Correlation: ", avg_spearman)
+st.table(metrics_table)
+st.table(data_table)
+st.plotly_chart(figfreqdis, use_container_width=True)
 st.plotly_chart(fig3, use_container_width=True)
 
 
@@ -265,17 +300,6 @@ dfgen_diff_avg_std['other_std'] = dfgen_diff_avg_std['other_diff'].std()
 dfgen_diff_avg_std['total_diff'] = dfgen_summed['totalE'] - dfgen_summed['totalX']
 dfgen_diff_avg_std['total_avg'] = dfgen_diff_avg_std['total_diff'].mean()
 dfgen_diff_avg_std['total_std'] = dfgen_diff_avg_std['total_diff'].std()
-
-# add the cumulative sum of the difference
-dfgen_diff_avg_std['nuclear_cumsum'] = dfgen_diff_avg_std['nuclear_diff'].cumsum()
-dfgen_diff_avg_std['natural_gas_cumsum'] = dfgen_diff_avg_std['natural_gas_diff'].cumsum()
-dfgen_diff_avg_std['coal_cumsum'] = dfgen_diff_avg_std['coal_diff'].cumsum()
-dfgen_diff_avg_std['solar_cumsum'] = dfgen_diff_avg_std['solar_diff'].cumsum()
-dfgen_diff_avg_std['wind_cumsum'] = dfgen_diff_avg_std['wind_diff'].cumsum()
-dfgen_diff_avg_std['biomass_cumsum'] = dfgen_diff_avg_std['biomass_diff'].cumsum()
-dfgen_diff_avg_std['hydro_cumsum'] = dfgen_diff_avg_std['hydro_diff'].cumsum()
-dfgen_diff_avg_std['other_cumsum'] = dfgen_diff_avg_std['other_diff'].cumsum()
-dfgen_diff_avg_std['total_cumsum'] = dfgen_diff_avg_std['total_diff'].cumsum()
 
 fig5 = go.Figure()
 

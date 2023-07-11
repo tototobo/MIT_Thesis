@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://www.capitaliq.spglobal.com/web/client?auth=inherit
+HostUrl=https://www.capitaliq.spglobal.com/SNL.Services.Export.Service/v2/Export/Retrieve?filename=SPGlobal_CommodityCharting(Chart)_05-Jun-2023_82a4e930-52cd-4c39-95ea-5eb292a5f4cc.xls

@@ -1,0 +1,10 @@
+Region,Resource,Zone,Cluster,R_ID,SubsidyRevenue
+TX,OCGT_1,1,1,1,0.0
+TX,CCGT_1,1,1,2,0.0
+TX,CCGT-CCS_1,1,1,3,0.0
+TX,Solar-UPV_1,1,1,4,0.0
+TX,Wind-onshore_1,1,1,5,0.0
+TX,Wind-offshore_1,1,1,6,0.0
+TX,Nuclear_1,1,1,7,0.0
+TX,Li-ion_1,1,1,8,0.0
+TX,Metal-air_medium_cost_1,1,1,9,0.0

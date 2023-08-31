@@ -1,0 +1,8 @@
+Region,Resource,Zone,Cluster,AnnualSum
+TX,OCGT_1,1,1,2.979245233270809e9
+TX,CCGT_1,1,1,4.073666479977135e9
+TX,CCGT-CCS_1,1,1,0.0
+TX,Solar-UPV_1,1,1,1.190971648309114e9
+TX,Wind-onshore_1,1,1,5.109457626228516e9
+TX,Wind-offshore_1,1,1,0.0
+TX,Nuclear_1,1,1,0.0
